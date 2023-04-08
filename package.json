@@ -1,0 +1,19 @@
+{
+  "name": "ps-calc",
+  "version": "1.0.0",
+  "description": "Position Size Calculator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "position",
+    "size",
+    "crypto"
+  ],
+  "author": "pseudocode88",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^24.0.0"
+  }
+}
