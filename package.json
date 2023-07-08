@@ -3,17 +3,28 @@
   "version": "1.0.0",
   "description": "Position Size Calculator",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
-    "position",
-    "size",
+    "position size",
     "crypto"
   ],
+  "scripts": {
+    "start": "electron ."
+  },
   "author": "pseudocode88",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^24.0.0"
+    "@electron-forge/cli": "^6.2.1",
+    "@electron-forge/maker-dmg": "^6.2.1",
+    "electron": "^25.2.0"
+  },
+  "config": {
+    "forge": {
+      "makers": [
+        {
+          "name": "@electron-forge/maker-dmg",
+          "config": {}
+        }
+      ]
+    }
   }
 }

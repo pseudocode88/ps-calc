@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+  <title>Position Size Calc</title>
+  <link rel="stylesheet" href="index.css" type="text/css" />
+</head>
+
+<body>
+  <main>
+    <h1>PS Calculator</h1>
+
+    <hr />
+    <section class="Value">
+      <p>Risk: <span id="risk">0.00</span></p>
+      <hr />
+      <p>Margin: <span id="margin">0.00</span></p>
+    </section>
+    <hr />
+
+    <section class="Size">
+      <div>
+        <label>Stop Loss</label>
+        <input type="text" id="sl" value="100" />
+      </div>
+
+      <div>
+        <label>Stop Loss</label>
+        <input type="text" id="sl" value="100" />
+      </div>
+
+      <div>
+        <label>Position Size</label>
+        <input type="text" id="ps" value="100" />
+      </div>
+
+      <div>
+        <label>Leverage</label>
+        <input type="text" id="lev" value="10" />
+        <!-- <input type="range" value="10" min="1" max="175" step="1" /> -->
+      </div>
+    </section>
+
+    <hr />
+
+    <section class="Settings">
+      <div class="Settings__Capital">
+        <label>Capital</label>
+        <input type="text" id="capital" value="100" />
+      </div>
+      <div class="Settings__Risk">
+        <label>Min% Risk</label>
+        <input type="text" id="min-risk" value="3" placeholder="Min %" />
+      </div>
+      <div class="Settings__Risk">
+        <label>Max% Risk</label>
+        <input type="text" id="max-risk" value="5" placeholder="Max %" />
+      </div>
+    </section>
+  </main>
+
+  <script type="text/javascript" src="calc.js"></script>
+</body>
+
+</html>
