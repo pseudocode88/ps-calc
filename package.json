@@ -8,7 +8,8 @@
     "crypto"
   ],
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-forge package"
   },
   "author": "pseudocode88",
   "license": "ISC",
