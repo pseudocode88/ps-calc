@@ -6,16 +6,154 @@
   <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
-  <title>Position Size Calc</title>
+  <title>Trader Bruh</title>
   <link rel="stylesheet" href="index.css" type="text/css" />
 </head>
 
 <body>
-  <main>
-    <h1>PS Calculator</h1>
+  <main class="fc f-wrap-32">
+    <img src="assets/logo-1000.png" class="Logo" />
 
-    <hr />
-    <section class="Value">
+    <section class="Section">
+      <div class="fc f-wrap-24">
+        <div class="fc f-wrap-12">
+          <h2>Position Size Builder</h2>
+          <p class="sub-label">Build your position size based on the stop loss and the risk you defined in the account
+            settings.</p>
+        </div>
+
+        <div class="fr f-wrap-24">
+          <div>
+            <label>Stop Loss %</label>
+            <input type="text" id="txt-sl" value="1" />
+          </div>
+
+          <div>
+            <label>Take Profit %</label>
+            <input type="text" id="txt-tp" value="1" />
+          </div>
+
+          <div>
+            <label>Leverage</label>
+            <input type="text" id="txt-lev" value="1" />
+          </div>
+        </div>
+
+        <div class="RList">
+          <div class="fr RList-Title">
+            <p>Cap Risk</p>
+            <p class="RList-Label-right">Size</p>
+            <p class="RList-Label-right">Loss</p>
+            <p class="RList-Label-right">Gain</p>
+            <p class="RList-Label-right">Lev</p>
+          </div>
+          <div class="fr RList-Item">
+            <p class="clr-info">Low</p>
+            <p class="RList-Label-right">1000</p>
+            <p class="RList-Label-right">2</p>
+            <p class="RList-Label-right">2</p>
+            <p class="RList-Label-right">175</p>
+          </div>
+          <div class="fr RList-Item">
+            <p class="clr-success">Medium</p>
+            <p class="RList-Label-right">1000</p>
+            <p class="RList-Label-right">3</p>
+            <p class="RList-Label-right">3</p>
+            <p class="RList-Label-right">175</p>
+          </div>
+          <div class="fr RList-Item">
+            <p class="clr-warning">High</p>
+            <p class="RList-Label-right">1000</p>
+            <p class="RList-Label-right">4</p>
+            <p class="RList-Label-right">4</p>
+            <p class="RList-Label-right">175</p>
+          </div>
+          <div class="fr RList-Item">
+            <p class="clr-danger">x High</p>
+            <p class="RList-Label-right">1000</p>
+            <p class="RList-Label-right">5</p>
+            <p class="RList-Label-right">5</p>
+            <p class="RList-Label-right">175</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="Section">
+      <div class="fc f-wrap-24">
+        <div class="fc f-wrap-12">
+          <h2>Account Settings</h2>
+          <p class="sub-label">To setup your trading account, add the capital, risk per trade and the exchange maker and
+            taker fee. This is important to fill first to simulate the position size.</p>
+        </div>
+
+        <div id="section-account-settings" class="fc f-wrap-24">
+
+          <div class="AccountSettingsList">
+            <div class="fr AccountSettingsList-Item">
+              <p>Trading Capital</p>
+              <p class="RList-Label-right" id="lbl-capital">-</p>
+            </div>
+            <div class="fr AccountSettingsList-Item">
+              <p>Risk per Trade - Min%</p>
+              <p class="RList-Label-right" id="lbl-min-risk">-</p>
+            </div>
+            <div class="fr AccountSettingsList-Item">
+              <p>Risk per Trade - Max%</p>
+              <p class="RList-Label-right" id="lbl-max-risk">-</p>
+            </div>
+            <div class="fr AccountSettingsList-Item">
+              <p>Maker Fee</p>
+              <p class="RList-Label-right" id="lbl-maker-fee">-</p>
+            </div>
+            <div class="fr AccountSettingsList-Item">
+              <p>Taker Fee</p>
+              <p class="RList-Label-right" id="lbl-taker-fee">-</p>
+            </div>
+          </div>
+
+          <button id="button-edit-account-settings" class="Button Button-Primary">Edit Settings</button>
+        </div>
+
+        <div id="form-account-settings" class="fc f-wrap-24 hide FormAccountSettings">
+          <div class="Settings__Capital">
+            <label>Trading Capital</label>
+            <input type="text" id="txt-capital" value="100" />
+          </div>
+
+          <div class="fr f-wrap-24">
+            <div class="strech">
+              <label>Risk per trade - Min%</label>
+              <input type="text" id="txt-min-risk" value="3" placeholder="Min %" />
+            </div>
+            <div class="strech">
+              <label>Risk per trade - Max%</label>
+              <input type="text" id="txt-max-risk" value="5" placeholder="Max %" />
+            </div>
+          </div>
+
+          <div class="fr f-wrap-24">
+            <div class="strech">
+              <label>Maker Fee %</label>
+              <input type="text" id="txt-maker-fee" value="0.02" placeholder="Min %" />
+            </div>
+            <div class="strech">
+              <label>Taker Fee %</label>
+              <input type="text" id="txt-taker-fee" value="0.05" placeholder="Max %" />
+            </div>
+          </div>
+
+          <div class="fr f-wrap-24 FormAccountSettings-ButtonGroup">
+            <button id="button-save-account-settings" class="Button Button-Primary">Save Settings</button>
+            <button id="button-cancel-account-settings" class="Button Button-Secondary">Cancel</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- <section class="Value">
       <p>Risk: <span id="risk">0.00</span></p>
       <hr />
       <p>Margin: <span id="margin">0.00</span></p>
@@ -41,8 +179,7 @@
       <div>
         <label>Leverage</label>
         <input type="text" id="lev" value="10" />
-        <!-- <input type="range" value="10" min="1" max="175" step="1" /> -->
-      </div>
+    </div>
     </section>
 
     <hr />
@@ -60,7 +197,7 @@
         <label>Max% Risk</label>
         <input type="text" id="max-risk" value="5" placeholder="Max %" />
       </div>
-    </section>
+    </section> -->
   </main>
 
   <script type="text/javascript" src="calc.js"></script>
