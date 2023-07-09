@@ -8,7 +8,8 @@ const createWindow = () => {
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
-        }
+        },
+        icon: 'assets/logo-1000.png'
     })
 
     win.resizable = true;
@@ -16,6 +17,8 @@ const createWindow = () => {
 
     win.loadFile('index.html')
 }
+
+app.setName("Trader Bruh");
 
 app.whenReady().then(() => {
     createWindow()
