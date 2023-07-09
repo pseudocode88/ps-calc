@@ -23,57 +23,62 @@
         </div>
 
         <div class="fr f-wrap-24">
-          <div>
+          <div class="strech">
             <label>Stop Loss %</label>
             <input type="text" id="txt-sl" value="1" />
           </div>
 
-          <div>
+          <div class="strech">
             <label>Take Profit %</label>
             <input type="text" id="txt-tp" value="1" />
           </div>
 
-          <div>
+          <!-- <div>
             <label>Leverage</label>
             <input type="text" id="txt-lev" value="1" />
-          </div>
+          </div> -->
         </div>
 
         <div class="RList">
           <div class="fr RList-Title">
-            <p>Cap Risk</p>
+            <p>Risk</p>
             <p class="RList-Label-right">Size</p>
             <p class="RList-Label-right">Loss</p>
             <p class="RList-Label-right">Gain</p>
             <p class="RList-Label-right">Lev</p>
+            <p class="RList-Label-right">Margin</p>
           </div>
           <div class="fr RList-Item">
             <p class="clr-info">Low</p>
-            <p class="RList-Label-right">1000</p>
-            <p class="RList-Label-right">2</p>
-            <p class="RList-Label-right">2</p>
-            <p class="RList-Label-right">175</p>
+            <p id="l-size" class="RList-Label-right">0</p>
+            <p id="l-loss" class="RList-Label-right">0</p>
+            <p id="l-gain" class="RList-Label-right">0</p>
+            <p id="l-lev" class="RList-Label-right">0</p>
+            <p id="l-margin" class="RList-Label-right">0</p>
           </div>
           <div class="fr RList-Item">
             <p class="clr-success">Medium</p>
-            <p class="RList-Label-right">1000</p>
-            <p class="RList-Label-right">3</p>
-            <p class="RList-Label-right">3</p>
-            <p class="RList-Label-right">175</p>
+            <p id="m-size" class="RList-Label-right">0</p>
+            <p id="m-loss" class="RList-Label-right">0</p>
+            <p id="m-gain" class="RList-Label-right">0</p>
+            <p id="m-lev" class="RList-Label-right">0</p>
+            <p id="m-margin" class="RList-Label-right">0</p>
           </div>
           <div class="fr RList-Item">
             <p class="clr-warning">High</p>
-            <p class="RList-Label-right">1000</p>
-            <p class="RList-Label-right">4</p>
-            <p class="RList-Label-right">4</p>
-            <p class="RList-Label-right">175</p>
+            <p id="h-size" class="RList-Label-right">0</p>
+            <p id="h-loss" class="RList-Label-right">0</p>
+            <p id="h-gain" class="RList-Label-right">0</p>
+            <p id="h-lev" class="RList-Label-right">0</p>
+            <p id="h-margin" class="RList-Label-right">0</p>
           </div>
           <div class="fr RList-Item">
             <p class="clr-danger">x High</p>
-            <p class="RList-Label-right">1000</p>
-            <p class="RList-Label-right">5</p>
-            <p class="RList-Label-right">5</p>
-            <p class="RList-Label-right">175</p>
+            <p id="xh-size" class="RList-Label-right">0</p>
+            <p id="xh-loss" class="RList-Label-right">0</p>
+            <p id="xh-gain" class="RList-Label-right">0</p>
+            <p id="xh-lev" class="RList-Label-right">0</p>
+            <p id="xh-margin" class="RList-Label-right">0</p>
           </div>
         </div>
 

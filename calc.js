@@ -2,10 +2,12 @@ const $ = require('jquery');
 var DS = require('nedb');
 
 var el = {
+    psBuilder: {},
     accountSettings: {}
 };
 
 var data = {
+    psBuilder: {},
     accountSettings: {
         capital: 0,
         minRisk: 0,
@@ -18,7 +20,15 @@ var data = {
 var db = {};
 
 function cacheSelectors() {
+    cachePSBuilderSelectors();
     cacheAccountSettingsSelectors();
+}
+
+function cachePSBuilderSelectors() {
+    el.psBuilder.sl = $('#txt-sl');
+    el.psBuilder.tp = $('#txt-tp');
+    el.psBuilder.lev = $('#txt-lev');
+
 }
 
 function cacheAccountSettingsSelectors() {
@@ -30,7 +40,64 @@ function cacheAccountSettingsSelectors() {
 }
 
 function eventBindings() {
+    eventBindingsForPSBuilder();
     eventBindingsForAccountSettings();
+}
+
+function eventBindingsForPSBuilder() {
+    el.psBuilder.sl.on("keyup", calc);
+    el.psBuilder.tp.on("keyup", calc);
+}
+
+function calc() {
+    data.psBuilder.sl = el.psBuilder.sl.val();
+    data.psBuilder.tp = el.psBuilder.tp.val();
+
+    var riskLevels = {
+        l: Math.floor(data.accountSettings.capital * ((data.accountSettings.minRisk - 1) / 100)),
+        m: Math.floor(data.accountSettings.capital * (data.accountSettings.minRisk / 100)),
+        h: Math.floor(data.accountSettings.capital * (((parseFloat(data.accountSettings.minRisk) + parseFloat(data.accountSettings.maxRisk)) / 2) / 100)),
+        xh: Math.floor(data.accountSettings.capital * (data.accountSettings.maxRisk / 100))
+    }
+
+    var suggestions = [];
+
+    var r = 0,
+        m = 0,
+        ps = 0,
+        sl = data.psBuilder.sl || 1,
+        tp = data.psBuilder.tp || 1,
+        g = 0,
+        l = 0,
+        id = '';
+
+    Object.keys(riskLevels).forEach((key) => {
+        id = key;
+        r = riskLevels[key];
+        m = r + 1;
+        l = Math.floor(r / (m * (sl / 100)));
+        ps = Math.floor(m * l);
+        g = Math.floor((l * m) * (tp / 100));
+
+        suggestions.push({
+            id: id,
+            r: r,
+            m: m,
+            l: l,
+            g: g,
+            ps: ps
+        });
+    });
+
+    var prefix = '';
+    suggestions.forEach((sug) => {
+        prefix = '#' + sug.id + '-'
+        $(prefix + "size").html(sug.ps);
+        $(prefix + "loss").html(sug.r);
+        $(prefix + "gain").html(sug.g);
+        $(prefix + "lev").html(sug.l);
+        $(prefix + "margin").html(sug.m);
+    })
 }
 
 function eventBindingsForAccountSettings() {
@@ -65,22 +132,22 @@ function updateAccountSettingsData() {
         if (!docs) {
             db.accountSettings.insert({
                 exchange: 'default',
-                capital: data.accountSettings.capital,
-                minRisk: data.accountSettings.minRisk,
-                maxRisk: data.accountSettings.maxRisk,
-                makerFee: data.accountSettings.makerFee,
-                takerFee: data.accountSettings.takerFee
+                capital: parseFloat(data.accountSettings.capital),
+                minRisk: parseFloat(data.accountSettings.minRisk),
+                maxRisk: parseFloat(data.accountSettings.maxRisk),
+                makerFee: parseFloat(data.accountSettings.makerFee),
+                takerFee: parseFloat(data.accountSettings.takerFee)
             })
         } else {
             db.accountSettings.update({
                 exchange: 'default'
             }, {
                 exchange: 'default',
-                capital: data.accountSettings.capital,
-                minRisk: data.accountSettings.minRisk,
-                maxRisk: data.accountSettings.maxRisk,
-                makerFee: data.accountSettings.makerFee,
-                takerFee: data.accountSettings.takerFee
+                capital: parseFloat(data.accountSettings.capital),
+                minRisk: parseFloat(data.accountSettings.minRisk),
+                maxRisk: parseFloat(data.accountSettings.maxRisk),
+                makerFee: parseFloat(data.accountSettings.makerFee),
+                takerFee: parseFloat(data.accountSettings.takerFee)
             })
         }
     })
@@ -112,12 +179,11 @@ $(window).on('load', () => {
 
     db.accountSettings.findOne({ exchange: 'default' }, (err, docs) => {
         if (docs) {
-            console.log(docs);
-            data.accountSettings.capital = docs.capital;
-            data.accountSettings.minRisk = docs.minRisk;
-            data.accountSettings.maxRisk = docs.maxRisk;
-            data.accountSettings.makerFee = docs.makerFee;
-            data.accountSettings.takerFee = docs.takerFee;
+            data.accountSettings.capital = parseFloat(docs.capital);
+            data.accountSettings.minRisk = parseFloat(docs.minRisk);
+            data.accountSettings.maxRisk = parseFloat(docs.maxRisk);
+            data.accountSettings.makerFee = parseFloat(docs.makerFee);
+            data.accountSettings.takerFee = parseFloat(docs.takerFee);
         }
 
         renderAccountSettingsData();
