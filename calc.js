@@ -11,7 +11,9 @@ var data = {
     accountSettings: {
         capital: 0,
         minRisk: 0,
+        minRiskAmt: 0,
         maxRisk: 0,
+        maxRiskAmt: 0,
         makerFee: 0,
         takerFee: 0
     }
@@ -127,6 +129,8 @@ function calc() {
         $(prefix + "lev").html(sug.l);
         $(prefix + "margin").html(sug.m);
     })
+
+    $('#best-position').html(suggestions[0].ps + '-' + suggestions[3].ps);
 }
 
 function eventBindingsForAccountSettings() {
@@ -153,22 +157,21 @@ function toggleAccountSettingsForm(showForm) {
 function updateAccountSettingsData() {
     data.accountSettings.capital = $('#txt-capital').val();
     data.accountSettings.minRisk = $('#txt-min-risk').val();
+    data.accountSettings.minRiskAmt = parseFloat(data.accountSettings.capital) * (parseFloat(data.accountSettings.minRisk) / 100);
     data.accountSettings.maxRisk = $('#txt-max-risk').val();
+    data.accountSettings.maxRiskAmt = parseFloat(data.accountSettings.capital) * (parseFloat(data.accountSettings.maxRisk) / 100);
     data.accountSettings.makerFee = $('#txt-maker-fee').val();
     data.accountSettings.takerFee = $('#txt-taker-fee').val();
 
     db.accountSettings.findOne({ exchange: 'default' }, (err, docs) => {
-        var minRiskAmt = parseFloat(data.accountSettings.capital) * (parseFloat(data.accountSettings.minRisk) / 100),
-            maxRiskAmt = parseFloat(data.accountSettings.capital) * (parseFloat(data.accountSettings.maxRisk) / 100);
-
         if (!docs) {
             db.accountSettings.insert({
                 exchange: 'default',
                 capital: parseFloat(data.accountSettings.capital),
                 minRisk: parseFloat(data.accountSettings.minRisk),
-                minRiskAmt: minRiskAmt,
+                minRiskAmt: parseFloat(data.accountSettings.minRiskAmt),
                 maxRisk: parseFloat(data.accountSettings.maxRisk),
-                maxRiskAmt: maxRiskAmt,
+                maxRiskAmt: parseFloat(data.accountSettings.maxRiskAmt),
                 makerFee: parseFloat(data.accountSettings.makerFee),
                 takerFee: parseFloat(data.accountSettings.takerFee)
             })
@@ -179,13 +182,15 @@ function updateAccountSettingsData() {
                 exchange: 'default',
                 capital: parseFloat(data.accountSettings.capital),
                 minRisk: parseFloat(data.accountSettings.minRisk),
-                minRiskAmt: minRiskAmt,
+                minRiskAmt: parseFloat(data.accountSettings.minRiskAmt),
                 maxRisk: parseFloat(data.accountSettings.maxRisk),
-                maxRiskAmt: maxRiskAmt,
+                maxRiskAmt: parseFloat(data.accountSettings.maxRiskAmt),
                 makerFee: parseFloat(data.accountSettings.makerFee),
                 takerFee: parseFloat(data.accountSettings.takerFee)
             })
         }
+
+        syncAccountSettingsData(data.accountSettings);
     })
 }
 
@@ -205,6 +210,16 @@ function renderAccountSettingsData(isForm) {
     }
 }
 
+function syncAccountSettingsData(docs) {
+    data.accountSettings.capital = parseFloat(docs.capital);
+    data.accountSettings.minRisk = parseFloat(docs.minRisk);
+    data.accountSettings.minRiskAmt = parseFloat(docs.minRiskAmt);
+    data.accountSettings.maxRisk = parseFloat(docs.maxRisk);
+    data.accountSettings.maxRiskAmt = parseFloat(docs.maxRiskAmt);
+    data.accountSettings.makerFee = parseFloat(docs.makerFee);
+    data.accountSettings.takerFee = parseFloat(docs.takerFee);
+}
+
 $(window).on('load', () => {
 
     db.accountSettings = new DS({
@@ -215,13 +230,7 @@ $(window).on('load', () => {
 
     db.accountSettings.findOne({ exchange: 'default' }, (err, docs) => {
         if (docs) {
-            data.accountSettings.capital = parseFloat(docs.capital);
-            data.accountSettings.minRisk = parseFloat(docs.minRisk);
-            data.accountSettings.minRiskAmt = parseFloat(docs.minRiskAmt);
-            data.accountSettings.maxRisk = parseFloat(docs.maxRisk);
-            data.accountSettings.maxRiskAmt = parseFloat(docs.maxRiskAmt);
-            data.accountSettings.makerFee = parseFloat(docs.makerFee);
-            data.accountSettings.takerFee = parseFloat(docs.takerFee);
+            syncAccountSettingsData(docs);
         }
 
         renderAccountSettingsData();
