@@ -28,7 +28,7 @@ function cachePSBuilderSelectors() {
     el.psBuilder.sl = $('#txt-sl');
     el.psBuilder.tp = $('#txt-tp');
     el.psBuilder.lev = $('#txt-lev');
-
+    el.psBuilder.ps = $('#txt-ps');
 }
 
 function cacheAccountSettingsSelectors() {
@@ -47,11 +47,40 @@ function eventBindings() {
 function eventBindingsForPSBuilder() {
     el.psBuilder.sl.on("keyup", calc);
     el.psBuilder.tp.on("keyup", calc);
+    el.psBuilder.lev.on("keyup", calc);
+    el.psBuilder.ps.on("keyup", calc);
 }
 
 function calc() {
     data.psBuilder.sl = el.psBuilder.sl.val();
     data.psBuilder.tp = el.psBuilder.tp.val();
+    data.psBuilder.lev = el.psBuilder.lev.val() || 1;
+    data.psBuilder.ps = el.psBuilder.ps.val();
+
+    data.psBuilder.margin = data.psBuilder.ps / data.psBuilder.lev;
+    data.psBuilder.margin = data.psBuilder.margin.toFixed(2);
+
+    data.psBuilder.risk = ((data.psBuilder.sl / 100) * data.psBuilder.lev) * data.psBuilder.margin
+    data.psBuilder.risk = data.psBuilder.risk.toFixed(2);
+
+    data.psBuilder.gain = ((data.psBuilder.tp / 100) * data.psBuilder.lev) * data.psBuilder.margin
+    data.psBuilder.gain = data.psBuilder.gain.toFixed(2);
+
+    // $('#lbl-ps').html(data.psBuilder.ps);
+    $('#lbl-risk').html(data.psBuilder.risk);
+    $('#lbl-gain').html(data.psBuilder.gain);
+    // $('#lbl-lev').html(data.psBuilder.lev);
+    $('#lbl-margin').html(data.psBuilder.margin);
+
+    if (data.psBuilder.risk < data.accountSettings.minRiskAmt) {
+        $('#lbl-risk').removeClass('clr-warning clr-danger').addClass('clr-success');
+    } else if (data.psBuilder.risk > data.accountSettings.minRiskAmt && data.psBuilder.risk < data.accountSettings.maxRiskAmt) {
+        $('#lbl-risk').removeClass('clr-danger clr-success').addClass('clr-warning');
+    } else {
+        $('#lbl-risk').removeClass('clr-success clr-warning').addClass('clr-danger');
+    }
+
+    // Suggestions 
 
     var riskLevels = {
         l: Math.floor(data.accountSettings.capital * ((data.accountSettings.minRisk - 1) / 100)),
@@ -129,12 +158,17 @@ function updateAccountSettingsData() {
     data.accountSettings.takerFee = $('#txt-taker-fee').val();
 
     db.accountSettings.findOne({ exchange: 'default' }, (err, docs) => {
+        var minRiskAmt = parseFloat(data.accountSettings.capital) * (parseFloat(data.accountSettings.minRisk) / 100),
+            maxRiskAmt = parseFloat(data.accountSettings.capital) * (parseFloat(data.accountSettings.maxRisk) / 100);
+
         if (!docs) {
             db.accountSettings.insert({
                 exchange: 'default',
                 capital: parseFloat(data.accountSettings.capital),
                 minRisk: parseFloat(data.accountSettings.minRisk),
+                minRiskAmt: minRiskAmt,
                 maxRisk: parseFloat(data.accountSettings.maxRisk),
+                maxRiskAmt: maxRiskAmt,
                 makerFee: parseFloat(data.accountSettings.makerFee),
                 takerFee: parseFloat(data.accountSettings.takerFee)
             })
@@ -145,7 +179,9 @@ function updateAccountSettingsData() {
                 exchange: 'default',
                 capital: parseFloat(data.accountSettings.capital),
                 minRisk: parseFloat(data.accountSettings.minRisk),
+                minRiskAmt: minRiskAmt,
                 maxRisk: parseFloat(data.accountSettings.maxRisk),
+                maxRiskAmt: maxRiskAmt,
                 makerFee: parseFloat(data.accountSettings.makerFee),
                 takerFee: parseFloat(data.accountSettings.takerFee)
             })
@@ -181,7 +217,9 @@ $(window).on('load', () => {
         if (docs) {
             data.accountSettings.capital = parseFloat(docs.capital);
             data.accountSettings.minRisk = parseFloat(docs.minRisk);
+            data.accountSettings.minRiskAmt = parseFloat(docs.minRiskAmt);
             data.accountSettings.maxRisk = parseFloat(docs.maxRisk);
+            data.accountSettings.maxRiskAmt = parseFloat(docs.maxRiskAmt);
             data.accountSettings.makerFee = parseFloat(docs.makerFee);
             data.accountSettings.takerFee = parseFloat(docs.takerFee);
         }

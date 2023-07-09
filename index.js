@@ -3,14 +3,15 @@ const { app, BrowserWindow } = require('electron');
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 520,
-        height: 768,
+        minWidth: 520,
+        height: 1000,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
         }
     })
 
-    win.resizable = false;
+    win.resizable = true;
     win.setAlwaysOnTop(true);
 
     win.loadFile('index.html')

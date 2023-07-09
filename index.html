@@ -22,6 +22,29 @@
             settings.</p>
         </div>
 
+        <div class="PositionSize fc">
+          <!-- <div class="PositionSize-Item fr">
+            <p class="PositionSize-Item-Label">Position Size</p>
+            <p id="lbl-ps" class="PositionSize-Item-Value">0</p>
+          </div> -->
+          <div class="PositionSize-Item fr">
+            <p class="PositionSize-Item-Label">Capital Risk</p>
+            <p id="lbl-risk" class="PositionSize-Item-Value">0</p>
+          </div>
+          <div class="PositionSize-Item fr">
+            <p class="PositionSize-Item-Label">Potential Gain</p>
+            <p id="lbl-gain" class="PositionSize-Item-Value">0</p>
+          </div>
+          <!-- <div class="PositionSize-Item fr">
+            <p class="PositionSize-Item-Label">Leverage</p>
+            <p id="lbl-lev" class="PositionSize-Item-Value">0</p>
+          </div> -->
+          <div class="PositionSize-Item fr">
+            <p class="PositionSize-Item-Label">Margin</p>
+            <p id="lbl-margin" class="PositionSize-Item-Value">0</p>
+          </div>
+        </div>
+
         <div class="fr f-wrap-24">
           <div class="strech">
             <label>Stop Loss %</label>
@@ -33,13 +56,25 @@
             <input type="text" id="txt-tp" value="1" />
           </div>
 
-          <!-- <div>
+          <div class="strech">
             <label>Leverage</label>
-            <input type="text" id="txt-lev" value="1" />
-          </div> -->
+            <input type="text" id="txt-lev" value="10" />
+          </div>
         </div>
 
-        <div class="RList">
+        <div class="strech">
+          <label>Position Size</label>
+          <input type="text" id="txt-ps" value="100" />
+        </div>
+
+    </section>
+
+    <section class="Section">
+      <div class="RList fc f-wrap-12">
+        <h2>Position Size Suggestion</h2>
+        <p class="BestPostion">Best position size range: <span id="best-position">30 - 90</span></p>
+        <p class="sub-label">Below is a list of different position sizes calculated based on your risk per trade</p>
+        <div>
           <div class="fr RList-Title">
             <p>Risk</p>
             <p class="RList-Label-right">Size</p>
@@ -81,7 +116,7 @@
             <p id="xh-margin" class="RList-Label-right">0</p>
           </div>
         </div>
-
+      </div>
       </div>
     </section>
 

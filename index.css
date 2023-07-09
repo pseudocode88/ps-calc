@@ -202,11 +202,24 @@ input[type=text]:focus {
     color: var(--content-secondary);
 }
 
+.Section h3 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--content-secondary);
+}
+
 .Section p.sub-label {
     color: var(--content-muted);
     font-size: 14px;
     line-height: 1.4;
     margin: 0;
+}
+
+.BestPostion {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--content-success);
 }
 
 .RList {
@@ -217,7 +230,7 @@ input[type=text]:focus {
     width: 100%;
     justify-content: space-between;
     border-bottom: 1px solid var(--static-border-primary);
-    padding: 0 0 6px 0;
+    padding: 10px 0;
 }
 
 .RList-Title p {
@@ -298,7 +311,7 @@ h1 {
 hr {
     border: 0;
     border-top: 1px solid var(--static-border-primary);
-    margin: 24px 0;
+    margin: 8px 0;
 }
 
 input[type=range] {
@@ -310,6 +323,17 @@ input[type=range] {
     font-size: 18px;
     font-weight: 700;
     margin: 16px 0;
+}
+
+.InlineFlag {
+    padding: 16px;
+    background-color: var(--int-support-warning-secondary-default);
+    border-radius: 8px;
+}
+
+.InlineFlag p {
+    font-size: 14px;
+    font-weight: 500;
 }
 
 /** Button **/
@@ -378,4 +402,43 @@ button {
 
 .FormAccountSettings-ButtonGroup button:first-child {
     width: 70%;
+}
+
+.PositionSize {
+    width: 100%;
+    padding: 0;
+    border-radius: 16px;
+    box-sizing: border-box;
+}
+
+.PositionSize-Item {
+    padding: 12px 0;
+    width: 100%;
+    border-bottom: 1px solid var(--static-border-primary);
+}
+
+.PositionSize-Item:first-child {
+    padding-top: 0;
+}
+
+.PositionSize-Item:last-child {
+    border: 0;
+}
+
+.PositionSize-Item p {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.PositionSize-Item-Label {
+    width: 100%;
+    color: var(--content-primary);
+    margin: 0;
+}
+
+.PositionSize-Item-Value {
+    width: 100%;
+    color: var(--content-secondary);
+    margin: 0;
+    text-align: right;
 }
