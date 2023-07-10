@@ -2,7 +2,7 @@ var db = {};
 
 $(window).on('load', () => {
     db.accountSettings = new DS({
-        filename: './account-settings.db',
+        filename: __dirname + 'account-settings.db',
         autoload: true,
         timestampData: true
     });
