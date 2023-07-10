@@ -70,11 +70,14 @@ var AccountSettings = ($, db) => {
     }
 
     var updateDB = () => {
+        var that = this;
         db.findOne({ exchange: 'default' }, (err, docs) => {
             if (!docs) {
-                db.insert(data)
+                db.insert(data);
+                that.observer.fire('AccountSettingsLoaded');
             } else {
                 db.update({ exchange: 'default' }, data);
+                that.observer.fire('AccountSettingsLoaded');
             }
         })
     }
@@ -118,6 +121,8 @@ var AccountSettings = ($, db) => {
             if (docs) {
                 updateLocalData(docs);
                 that.observer.fire('AccountSettingsLoaded');
+            } else {
+                that.observer.fire('AccountSettingsNotFound');
             }
             render();
         })

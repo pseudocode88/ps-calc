@@ -98,6 +98,7 @@ main {
     padding: 32px;
     margin: auto;
     box-sizing: border-box;
+    position: relative;
 }
 
 section {
@@ -461,4 +462,20 @@ button {
     font-size: 10px;
     font-weight: 500;
     color: var(--content-muted);
+}
+
+.Welcome {
+    background-color: var(--int-support-info-primary-default);
+    display: none;
+}
+
+.Welcome p {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--content-secondary);
+}
+
+.Welcome span {
+    color: var(--content-warning)
 }

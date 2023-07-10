@@ -20,4 +20,10 @@ $(window).on('load', () => {
 
     this.observer.on('PositionSizeCalculated', this.modules.PositionSizeSuggestion.render);
     this.observer.on('AccountSettingsLoaded', this.modules.PositionSizeBuilder.sync);
+    this.observer.on('AccountSettingsNotFound', () => {
+        $('#welcome-flag').show();
+    });
+    this.observer.on('AccountSettingsLoaded', () => {
+        $('#welcome-flag').hide();
+    });
 })
