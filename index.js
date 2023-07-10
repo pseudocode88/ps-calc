@@ -2,14 +2,15 @@ const { app, BrowserWindow } = require('electron');
 
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 520,
-        minWidth: 520,
+        width: 480,
+        minWidth: 480,
         height: 1000,
+        minHeight: 640,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
         },
-        icon: 'assets/logo-1000.png'
+        icon: 'assets/logo-1000.png',
     })
 
     win.resizable = true;
