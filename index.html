@@ -40,23 +40,23 @@
         <div class="fr f-wrap-24">
           <div class="strech">
             <label>Stop Loss %</label>
-            <input type="text" id="txt-sl" value="1" />
+            <input type="number" step=".01" id="txt-sl" value="1" />
           </div>
 
           <div class="strech">
             <label>Take Profit %</label>
-            <input type="text" id="txt-tp" value="1" />
+            <input type="number" step=".01" id="txt-tp" value="1" />
           </div>
 
           <div class="strech">
             <label>Leverage</label>
-            <input type="text" id="txt-lev" value="10" />
+            <input type="number" step="1" id="txt-lev" value="10" />
           </div>
         </div>
 
         <div class="strech">
           <label>Position Size</label>
-          <input type="text" id="txt-ps" value="100" />
+          <input type="number" step=".01" id="txt-ps" value="100" />
         </div>
 
     </section>
@@ -154,28 +154,28 @@
         <div id="form-account-settings" class="fc f-wrap-24 hide FormAccountSettings">
           <div class="Settings__Capital">
             <label>Trading Capital</label>
-            <input type="text" id="txt-capital" value="100" />
+            <input type="number" step="1" id="txt-capital" value="100" />
           </div>
 
           <div class="fr f-wrap-24">
             <div class="strech">
               <label>Risk per trade - Min%</label>
-              <input type="text" id="txt-min-risk" value="3" placeholder="Min %" />
+              <input type="number" step="1" id="txt-min-risk" value="3" placeholder="Min %" />
             </div>
             <div class="strech">
               <label>Risk per trade - Max%</label>
-              <input type="text" id="txt-max-risk" value="5" placeholder="Max %" />
+              <input type="number" step="1" id="txt-max-risk" value="5" placeholder="Max %" />
             </div>
           </div>
 
           <div class="fr f-wrap-24">
             <div class="strech">
               <label>Maker Fee %</label>
-              <input type="text" id="txt-maker-fee" value="0.02" placeholder="Min %" />
+              <input type="number" step=".01" id="txt-maker-fee" value="0.02" placeholder="Min %" />
             </div>
             <div class="strech">
               <label>Taker Fee %</label>
-              <input type="text" id="txt-taker-fee" value="0.05" placeholder="Max %" />
+              <input type="number" step=".01" id="txt-taker-fee" value="0.05" placeholder="Max %" />
             </div>
           </div>
 

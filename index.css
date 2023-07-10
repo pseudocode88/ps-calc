@@ -114,7 +114,8 @@ label {
     color: var(--content-secondary);
 }
 
-input[type=text] {
+input[type=text],
+input[type=number] {
     border: 1px solid var(--int-border-default);
     color: var(--content-primary);
     border-radius: 4px;
@@ -125,7 +126,8 @@ input[type=text] {
     background-color: var(--int-surface-primary-default);
 }
 
-input[type=text]:focus {
+input[type=text]:focus,
+input[type=number]:focus {
     outline: none;
     border: 1px solid var(--int-border-focus);
 }
