@@ -11,9 +11,14 @@ $ yarn install
 $ yarn run start
 
 # To build the app
-$ yarn run build
+$ yarn run ship
 ```
 
 ### Version v1.0
 - Simple position size calculator shows the risk and margin
 - Simple trading account setup with the capital and min-max risk
+
+### Version v2.0
+- Improved the look and feel of the tool
+- Position Size suggestion based on stop loss and risk per trade range
+- Persist account settings data
