@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "start": "electron .",
-    "build": "electron-forge package"
+    "build": "electron-forge package",
+    "ship": "node build.js"
   },
   "author": "pseudocode88",
   "license": "ISC",
