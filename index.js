@@ -2,15 +2,24 @@ const { app, BrowserWindow } = require('electron');
 
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 440,
-        height: 700,
+        width: 480,
+        minWidth: 480,
+        height: 1000,
+        minHeight: 640,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        },
+        icon: 'assets/logo-1000.png',
     })
 
-    win.resizable = false;
+    win.resizable = true;
     win.setAlwaysOnTop(true);
 
     win.loadFile('index.html')
 }
+
+app.setName("Trader Bruh");
 
 app.whenReady().then(() => {
     createWindow()

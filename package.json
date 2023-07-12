@@ -1,6 +1,6 @@
 {
-  "name": "ps-calc",
-  "version": "1.0.0",
+  "name": "trader-bruh",
+  "version": "1.1",
   "description": "Position Size Calculator",
   "main": "index.js",
   "keywords": [
@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "start": "electron .",
-    "build": "electron-forge package"
+    "build": "electron-forge package",
+    "ship": "node build.js"
   },
   "author": "pseudocode88",
   "license": "ISC",
@@ -23,9 +24,21 @@
       "makers": [
         {
           "name": "@electron-forge/maker-dmg",
-          "config": {}
+          "config": {
+            "name": "Trader bruh",
+            "icon": "assets/logo.icns"
+          }
         }
-      ]
+      ],
+      "packagerConfig": {
+        "icon": "assets/logo.icns",
+        "name": "Trader Bruh",
+        "iconSize": "10"
+      }
     }
+  },
+  "dependencies": {
+    "jquery": "^3.7.0",
+    "nedb": "^1.8.0"
   }
 }
