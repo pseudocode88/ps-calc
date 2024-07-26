@@ -27,30 +27,22 @@
             settings.</p>
         </div>
 
-        <div class="PositionSize fc">
-          <div class="PositionSize-Item fr">
-            <p class="PositionSize-Item-Label">Capital at Risk</p>
-            <p id="lbl-risk" class="PositionSize-Item-Value">0</p>
+        <div class="fr f-wrap-24">
+          <div class="strech">
+            <label>Entry Point</label>
+            <input type="number" step=".01" id="txt-ep" value="1" />
           </div>
-          <div class="PositionSize-Item fr">
-            <p class="PositionSize-Item-Label">Potential Gain</p>
-            <p id="lbl-gain" class="PositionSize-Item-Value">0</p>
-          </div>
-          <div class="PositionSize-Item fr">
-            <p class="PositionSize-Item-Label">Margin</p>
-            <p id="lbl-margin" class="PositionSize-Item-Value">0</p>
+
+          <div class="strech">
+            <label>Stop Loss</label>
+            <input type="number" step=".01" id="txt-sl" value="1" />
           </div>
         </div>
 
         <div class="fr f-wrap-24">
           <div class="strech">
-            <label>Stop Loss %</label>
-            <input type="number" step=".01" id="txt-sl" value="1" />
-          </div>
-
-          <div class="strech">
-            <label>Take Profit %</label>
-            <input type="number" step=".01" id="txt-tp" value="1" />
+            <label>Risk Amount</label>
+            <input type="number" step=".01" id="txt-risk" value="1" />
           </div>
 
           <div class="strech">
@@ -59,10 +51,30 @@
           </div>
         </div>
 
-        <div class="strech">
+        <div class="PositionSize fc">
+          <div class="PositionSize-Item fr">
+            <p class="PositionSize-Item-Label">Position Size</p>
+            <p id="lbl-ps" class="PositionSize-Item-Value">0</p>
+          </div>
+          <!-- <div class="PositionSize-Item fr">
+            <p class="PositionSize-Item-Label">Capital at Risk</p>
+            <p id="lbl-risk" class="PositionSize-Item-Value">0</p>
+          </div>
+          <div class="PositionSize-Item fr">
+            <p class="PositionSize-Item-Label">Potential Gain</p>
+            <p id="lbl-gain" class="PositionSize-Item-Value">0</p>
+          </div> -->
+          <div class="PositionSize-Item fr">
+            <p class="PositionSize-Item-Label">Margin</p>
+            <p id="lbl-margin" class="PositionSize-Item-Value">0</p>
+          </div>
+        </div>
+
+
+        <!-- <div class="strech">
           <label>Position Size</label>
           <input type="number" step=".01" id="txt-ps" value="100" />
-        </div>
+        </div> -->
 
     </section>
 
