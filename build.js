@@ -3,7 +3,7 @@ const { exec } = require('child_process');
 const path = require('path');
 
 const dbFolderPath = path.join(__dirname, 'db');
-const fileNames = ['account-settings.db']; // Add more file names as needed
+const fileNames = []; // Add more file names as needed
 
 // Step one: Delete and recreate the files
 function deleteAndRecreateFiles() {

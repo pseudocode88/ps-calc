@@ -1,6 +1,6 @@
 {
   "name": "trader-bruh",
-  "version": "1.1",
+  "version": "3.0",
   "description": "Position Size Calculator",
   "main": "index.js",
   "keywords": [
@@ -38,7 +38,6 @@
     }
   },
   "dependencies": {
-    "jquery": "^3.7.0",
-    "nedb": "^1.8.0"
+    "jquery": "^3.7.0"
   }
 }
