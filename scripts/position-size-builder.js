@@ -2,88 +2,89 @@ var PositionSizeBuilder = ($) => {
 
     var data = {
         stopLoss: 0,
-        entryPoint: 0,
+        entryPrice: 0,
         leverage: 1,
-        positionSize: 0,
-        margin: 0,
         risk: 0,
+        direction: 'long',
+        positionSizeUnit: 0,
+        positionSizeUSD: 0,
+        margin: 0
     };
 
     var el = {
-        txtStopLoss: $('#txt-sl'),
-        txtEntryPoint: $('#txt-ep'),
-        txtLeverage: $('#txt-lev'),
-        txtRiskAmount: $('#txt-risk'),
-        lblPositionSize: $('#lbl-ps'),
-        lblMargin: $('#lbl-margin')
-    }
-
-    var eventBindings = () => {
-        el.txtStopLoss.on("keyup", updatePositionSize);
-        el.txtEntryPoint.on("keyup", updatePositionSize);
-        el.txtLeverage.on("keyup", updatePositionSize);
-        el.txtRiskAmount.on("keyup", updatePositionSize);
-    }
-
-    var getFormData = () => {
-        return {
-            stopLoss: el.txtStopLoss.val() || 1,
-            entryPoint: el.txtEntryPoint.val() || 1,
-            leverage: el.txtLeverage.val() || 1,
-            risk: el.txtRiskAmount.val() || 1
+        textfield: {
+            stopLoss: $('#stop-loss'),
+            entryPrice: $('#entry-price'),
+            leverage: $('#leverage'),
+            riskAmount: $('#risk-amount')
+        },
+        label: {
+            positionSizeUnit: $('#label-position-size-units'),
+            positionSizeUSD: $('#label-position-size-usd'),
+            margin: $('#label-margin-usd')
+        },
+        wrapper: {
+            result: $('#result-panel')
         }
     }
 
-    var updatePositionSize = () => {
-        updateLocalData(getFormData());
-        calculatePositionSize();
-        render();
-        this.observer.fire('PositionSizeCalculated')
+    var eventBindings = () => {
+        Object.keys(el.textfield).forEach(function (id) {
+            el.textfield[id].on("keyup", updatePositionSize)
+        })
     }
 
-    var updateLocalData = (formData) => {
+    var getFormData = () => {
+        const formFields = {
+            stopLoss: el.textfield.stopLoss,
+            entryPrice: el.textfield.entryPrice,
+            leverage: el.textfield.leverage,
+            risk: el.textfield.riskAmount
+        };
+
+        return Object.entries(formFields).reduce((acc, [key, element]) => {
+            acc[key] = element.val() || '1';
+            return acc;
+        }, {});
+    }
+
+    var updatePositionSize = () => {
+        const formData = getFormData();
+        const data = calculatePositionSize(formData);
+        console.log(data);
+        updateData(data);
+        render();
+    }
+
+    var updateData = (formData) => {
         Object.keys(formData).forEach((key) => {
             data[key] = formData[key];
         })
     }
 
-    // unit = risk /(ep - sl)
-    // margin = (unit * ep)/lev
+    var calculatePositionSize = (data) => {
+        const { risk, entryPrice, stopLoss, leverage } = data;
 
-    var calculatePositionSize = () => {
-        data.positionSize = Math.round(data.risk / (data.entryPoint - data.stopLoss));
+        const priceDifference = (stopLoss > entryPrice) ? stopLoss - entryPrice : entryPrice - stopLoss;
 
-        data.margin = (data.positionSize * data.entryPoint) / data.leverage;
-        data.margin = data.margin.toFixed(2);
-
-        // data.risk = ((data.stopLoss / 100) * data.leverage) * data.margin
-        // data.risk = data.risk.toFixed(2);
-
-        // data.gain = ((data.takeProfit / 100) * data.leverage) * data.margin
-        // data.gain = data.gain.toFixed(2);
+        data.positionSizeUnit = Math.round(risk / Math.abs(priceDifference));
+        data.positionSizeUSD = (data.positionSizeUnit * entryPrice).toFixed(2);
+        data.margin = ((data.positionSizeUnit * entryPrice) / leverage).toFixed(2);
+        data.direction = (stopLoss > entryPrice) ? 'short' : 'long'
 
         return data;
     }
 
     var render = () => {
-        // el.lblRisk.html(data.risk);
-        // el.lblGain.html(data.gain);
-        el.lblMargin.html(data.margin);
-        el.lblPositionSize.html(data.positionSize);
+        const elementsToUpdate = {
+            positionSizeUnit: data.positionSizeUnit,
+            positionSizeUSD: "$" + data.positionSizeUSD,
+            margin: "$" + data.margin
+        };
 
-        var accountSettingsData = this.modules.AccountSettings.getData();
-
-        // if (data.risk < accountSettingsData.minRiskAmt) {
-        //     el.lblRisk.removeClass('clr-warning clr-danger').addClass('clr-success');
-        // } else if (data.risk > accountSettingsData.minRiskAmt && data.risk < accountSettingsData.maxRiskAmt) {
-        //     el.lblRisk.removeClass('clr-danger clr-success').addClass('clr-warning');
-        // } else {
-        //     el.lblRisk.removeClass('clr-success clr-warning').addClass('clr-danger');
-        // }
-    }
-
-    var getData = () => {
-        return data;
+        Object.entries(elementsToUpdate).forEach(([elementKey, value]) => {
+            el.label[elementKey].html(value);
+        });
     }
 
     var init = () => {
@@ -91,8 +92,6 @@ var PositionSizeBuilder = ($) => {
     }
 
     return {
-        init: init,
-        getData: getData,
-        sync: updatePositionSize,
+        init: init
     }
 }

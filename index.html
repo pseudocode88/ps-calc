@@ -12,210 +12,77 @@
 
 <body>
   <main class="fc f-wrap-32">
-    <img src="assets/logo-1000.png" class="Logo" />
-
-    <section id="welcome-flag" class="Section Welcome">
-      <p>Setup your trading account parameters to use the position size builder. Scroll to the bottom
-        to see the account settings.</p>
-    </section>
-
-    <section class="Section">
-      <div class="fc f-wrap-24">
-        <div class="fc f-wrap-12">
-          <h2>Position Size Builder</h2>
-          <p class="sub-label">Build your position size based on the stop loss and the risk you defined in the account
-            settings.</p>
-        </div>
-
-        <div class="fr f-wrap-24">
-          <div class="strech">
-            <label>Entry Point</label>
-            <input type="number" step=".01" id="txt-ep" value="1" />
-          </div>
-
-          <div class="strech">
-            <label>Stop Loss</label>
-            <input type="number" step=".01" id="txt-sl" value="1" />
-          </div>
-        </div>
-
-        <div class="fr f-wrap-24">
-          <div class="strech">
-            <label>Risk Amount</label>
-            <input type="number" step=".01" id="txt-risk" value="1" />
-          </div>
-
-          <div class="strech">
-            <label>Leverage</label>
-            <input type="number" step="1" id="txt-lev" value="10" />
-          </div>
-        </div>
-
-        <div class="PositionSize fc">
-          <div class="PositionSize-Item fr">
-            <p class="PositionSize-Item-Label">Position Size</p>
-            <p id="lbl-ps" class="PositionSize-Item-Value">0</p>
-          </div>
-          <!-- <div class="PositionSize-Item fr">
-            <p class="PositionSize-Item-Label">Capital at Risk</p>
-            <p id="lbl-risk" class="PositionSize-Item-Value">0</p>
-          </div>
-          <div class="PositionSize-Item fr">
-            <p class="PositionSize-Item-Label">Potential Gain</p>
-            <p id="lbl-gain" class="PositionSize-Item-Value">0</p>
-          </div> -->
-          <div class="PositionSize-Item fr">
-            <p class="PositionSize-Item-Label">Margin</p>
-            <p id="lbl-margin" class="PositionSize-Item-Value">0</p>
-          </div>
-        </div>
-
-
-        <!-- <div class="strech">
-          <label>Position Size</label>
-          <input type="number" step=".01" id="txt-ps" value="100" />
-        </div> -->
-
-    </section>
-
-    <section class="Section">
-      <div class="RList fc f-wrap-12">
-        <h2>Position Size Suggestion</h2>
-        <p class="BestPostion">Position size range based on your risk<br /><span class="clr-danger">Stop Loss</span>
-          <span id="best-stop-loss" class="clr-danger"></span> &emsp;→&emsp; <span id="best-position"
-            class="clr-success"></span>
-        </p>
-        <p class="sub-label">Below is a list of different position sizes calculated based on your risk per trade</p>
-        <div>
-          <div class="fr RList-Title">
-            <p>Risk</p>
-            <p class="RList-Label-right">Size</p>
-            <p class="RList-Label-right">Loss</p>
-            <p class="RList-Label-right">Gain</p>
-            <p class="RList-Label-right">Lev</p>
-            <p class="RList-Label-right">Margin</p>
-          </div>
-          <div class="fr RList-Item">
-            <p class="clr-info">Low</p>
-            <p id="l-size" class="RList-Label-right">0</p>
-            <p id="l-loss" class="RList-Label-right">0</p>
-            <p id="l-gain" class="RList-Label-right">0</p>
-            <p id="l-lev" class="RList-Label-right">0</p>
-            <p id="l-margin" class="RList-Label-right">0</p>
-          </div>
-          <div class="fr RList-Item">
-            <p class="clr-success">Medium</p>
-            <p id="m-size" class="RList-Label-right">0</p>
-            <p id="m-loss" class="RList-Label-right">0</p>
-            <p id="m-gain" class="RList-Label-right">0</p>
-            <p id="m-lev" class="RList-Label-right">0</p>
-            <p id="m-margin" class="RList-Label-right">0</p>
-          </div>
-          <div class="fr RList-Item">
-            <p class="clr-warning">High</p>
-            <p id="h-size" class="RList-Label-right">0</p>
-            <p id="h-loss" class="RList-Label-right">0</p>
-            <p id="h-gain" class="RList-Label-right">0</p>
-            <p id="h-lev" class="RList-Label-right">0</p>
-            <p id="h-margin" class="RList-Label-right">0</p>
-          </div>
-          <div class="fr RList-Item">
-            <p class="clr-danger">x High</p>
-            <p id="xh-size" class="RList-Label-right">0</p>
-            <p id="xh-loss" class="RList-Label-right">0</p>
-            <p id="xh-gain" class="RList-Label-right">0</p>
-            <p id="xh-lev" class="RList-Label-right">0</p>
-            <p id="xh-margin" class="RList-Label-right">0</p>
-          </div>
-        </div>
-      </div>
-      </div>
-    </section>
-
-    <section class="Section">
-      <div class="fc f-wrap-24">
-        <div class="fc f-wrap-12">
-          <h2>Account Settings</h2>
-          <p class="sub-label">To setup your trading account, add the capital, risk per trade and the exchange maker and
-            taker fee. This is important to fill first to simulate the position size.</p>
-        </div>
-
-        <div id="section-account-settings" class="fc f-wrap-24">
-
-          <div class="AccountSettingsList">
-            <div class="fr AccountSettingsList-Item">
-              <p>Trading Capital</p>
-              <p class="RList-Label-right" id="lbl-capital">-</p>
-            </div>
-            <div class="fr AccountSettingsList-Item">
-              <p>Risk per Trade - Min%</p>
-              <p class="RList-Label-right" id="lbl-min-risk">-</p>
-            </div>
-            <div class="fr AccountSettingsList-Item">
-              <p>Risk per Trade - Max%</p>
-              <p class="RList-Label-right" id="lbl-max-risk">-</p>
-            </div>
-            <div class="fr AccountSettingsList-Item">
-              <p>Maker Fee</p>
-              <p class="RList-Label-right" id="lbl-maker-fee">-</p>
-            </div>
-            <div class="fr AccountSettingsList-Item">
-              <p>Taker Fee</p>
-              <p class="RList-Label-right" id="lbl-taker-fee">-</p>
-            </div>
-          </div>
-
-          <button id="button-edit-account-settings" class="Button Button-Primary">Edit Settings</button>
-        </div>
-
-        <div id="form-account-settings" class="fc f-wrap-24 hide FormAccountSettings">
-          <div class="Settings__Capital">
-            <label>Trading Capital</label>
-            <input type="number" step="1" id="txt-capital" value="100" />
-          </div>
-
-          <div class="fr f-wrap-24">
-            <div class="strech">
-              <label>Risk per trade - Min%</label>
-              <input type="number" step="1" id="txt-min-risk" value="3" placeholder="Min %" />
-            </div>
-            <div class="strech">
-              <label>Risk per trade - Max%</label>
-              <input type="number" step="1" id="txt-max-risk" value="5" placeholder="Max %" />
-            </div>
-          </div>
-
-          <div class="fr f-wrap-24">
-            <div class="strech">
-              <label>Maker Fee %</label>
-              <input type="number" step=".01" id="txt-maker-fee" value="0.02" placeholder="Min %" />
-            </div>
-            <div class="strech">
-              <label>Taker Fee %</label>
-              <input type="number" step=".01" id="txt-taker-fee" value="0.05" placeholder="Max %" />
-            </div>
-          </div>
-
-          <div class="fr f-wrap-24 FormAccountSettings-ButtonGroup">
-            <button id="button-save-account-settings" class="Button Button-Primary">Save Settings</button>
-            <button id="button-cancel-account-settings" class="Button Button-Secondary">Cancel</button>
-          </div>
-        </div>
-
-      </div>
-    </section>
 
     <div class="Credits">
-      <p class="Credits-Title">Trader Bruh - v1.1</p>
-      <p class="Credits-Creator">by @PseudoCode88</p>
+      <div class="fr f-wrap-12">
+        <img src="assets/logo-1000.png" class="Logo" />
+        <div class="fc">
+          <p class="Credits-Title">Trader Bruh - v3.0</p>
+          <p class="Credits-Creator">by @PseudoCode88</p>
+        </div>
+      </div>
     </div>
+
+    <section>
+      <!-- Data Section-->
+      <section id="result-panel" class="Wrapper-Position-Size-Result">
+        <div class="fc f-wrap-24">
+          <div class="fc">
+            <p class="label">Position Size (units)</p>
+            <p class="value" id="label-position-size-units">0</p>
+          </div>
+          <div class="fc">
+            <p class="label">Position Size (USD)</p>
+            <p class="value" id="label-position-size-usd">$0</p>
+          </div>
+          <div class="fc">
+            <p class="label">Margin (USD)</p>
+            <p class="value" id="label-margin-usd">$0</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Form Section-->
+      <section class="Wrapper-Position-Size-Form">
+        <div class="fc f-wrap-24">
+          <div class="fc f-wrap-8">
+            <h2>Size Builder</h2>
+            <p class="Heading-Subtitle">Build your position size based on the stop loss and the risk you defined in
+              the account settings.</p>
+          </div>
+
+          <div class="fr f-wrap-24">
+            <div class="strech">
+              <label>Entry Point</label>
+              <input type="number" id="entry-price" value="1" />
+            </div>
+
+            <div class="strech">
+              <label>Stop Loss</label>
+              <input type="number" id="stop-loss" value="1" />
+            </div>
+          </div>
+
+          <div class="fr f-wrap-24">
+            <div class="strech">
+              <label>Risk Amount</label>
+              <input type="number" id="risk-amount" value="1" />
+            </div>
+
+            <div class="strech">
+              <label>Leverage</label>
+              <input type="number" step="1" id="leverage" value="10" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+
   </main>
 
   <script type="text/javascript" src="scripts/deps.js"></script>
-  <script type="text/javascript" src="scripts/observer.js"></script>
-  <script type="text/javascript" src="scripts/account-settings.js"></script>
   <script type="text/javascript" src="scripts/position-size-builder.js"></script>
-  <script type="text/javascript" src="scripts/position-size-suggestion.js"></script>
   <script type="text/javascript" src="scripts/index.js"></script>
 </body>
 
