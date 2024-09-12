@@ -4,8 +4,9 @@
   "description": "Position Size Calculator",
   "main": "index.js",
   "keywords": [
+    "trade",
     "position size",
-    "crypto"
+    "calculator"
   ],
   "scripts": {
     "start": "electron .",
@@ -14,6 +15,9 @@
   },
   "author": "pseudocode88",
   "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.7.0"
+  },
   "devDependencies": {
     "@electron-forge/cli": "^6.2.1",
     "@electron-forge/maker-dmg": "^6.2.1",
@@ -34,10 +38,15 @@
         "icon": "assets/logo.icns",
         "name": "Trader Bruh",
         "iconSize": "10"
-      }
+      },
+      "ignore": [
+        ".gitignore",
+        "package.json",
+        "build.js",
+        "README.md",
+        "yarn.lock",
+        ".fleet/"
+      ]
     }
-  },
-  "dependencies": {
-    "jquery": "^3.7.0"
   }
 }
