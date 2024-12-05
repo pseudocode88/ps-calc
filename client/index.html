@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8"/>
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+    <title>Trader Bruh</title>
+    <link rel="stylesheet" href="./style.css" type="text/css"/>
+  </head>
+
+  <body>
+    <main class="fc f-wrap-32">
+
+      <div class="Credits">
+        <div class="fr f-wrap-12">
+          <img alt="logo" src="../assets/logo-1000.png" class="Logo"/>
+          <div class="fc">
+            <p class="Credits-Title">Trader Bruh - v3.0</p>
+            <p class="Credits-Creator">by @PseudoCode88</p>
+          </div>
+        </div>
+      </div>
+
+      <section>
+        <!-- Data Section-->
+        <section id="result-panel" class="Wrapper-Position-Size-Result">
+          <div class="fc f-wrap-24">
+            <div class="fc">
+              <p class="label">Position Size (units)</p>
+              <p class="value" id="label-position-size-units">0</p>
+            </div>
+            <div class="fc">
+              <p class="label">Position Size (USD)</p>
+              <p class="value" id="label-position-size-usd">$0</p>
+            </div>
+            <div class="fc">
+              <p class="label">Margin (USD)</p>
+              <p class="value" id="label-margin-usd">$0.00</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Form Section-->
+        <section class="Wrapper-Position-Size-Form">
+          <div class="fc f-wrap-24">
+            <div class="fc f-wrap-8">
+              <h2>Size Builder</h2>
+              <p class="Heading-Subtitle">Build your position size based on the stop loss and the risk you defined in
+                the account settings.</p>
+            </div>
+
+            <div class="fr f-wrap-24">
+              <div class="strech">
+                <label for="entry-price">Entry Point</label>
+                <input type="number" id="entry-price" value="1"/>
+              </div>
+
+              <div class="strech">
+                <label for="stop-loss">Stop Loss</label>
+                <input type="number" id="stop-loss" value="1"/>
+              </div>
+            </div>
+
+            <div class="fr f-wrap-24">
+              <div class="strech">
+                <label for="risk-amount">Risk Amount</label>
+                <input type="number" id="risk-amount" value="1"/>
+              </div>
+
+              <div class="strech">
+                <label for="leverage">Leverage</label>
+                <input type="number" step="1" id="leverage" value="10"/>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+
+    </main>
+    <script type="text/javascript" src="./script.js"></script>
+  </body>
+
+</html>
